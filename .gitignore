@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Local secrets — copy .env.example to .env
+.env
+
+# Run output
+reports/
+logs/
+*.log
+
+# IDE
+.idea/
+.vscode/
