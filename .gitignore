@@ -3,7 +3,7 @@ __pycache__/
 *.pyc
 .venv/
 
-# Local secrets — copy .env.example to .env
+# Local settings (see "Setup" in the README)
 .env
 
 # Run output
