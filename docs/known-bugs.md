@@ -17,7 +17,7 @@ while the bug is there, and are skipped in a normal run. Run them with
 | D3 | Search | Spaces are not trimmed; no message when nothing matches | Low | Exploration, 2026-10-05 |
 | D4 | Book details | A non-existent ISBN shows an empty page with no message | Low | Exploration, 2026-10-05 |
 | D5 | Login (API) | Wrong credentials return `200 OK` instead of `401` | Medium | Exploration, 2026-10-05 |
-| D6 | Registration (UI) | The password error disappears too fast, and all fields are cleared | Medium | Exploration, 2026-10-05 |
+| D6 | Registration (UI) | A password error disappears too fast and clears all fields; after registering, the user is left on the form | Medium | Exploration, 2026-10-05 |
 | D7 | Session | The session token cookie is readable by JavaScript (not `HttpOnly`) | Medium | Exploration, 2026-10-05 |
 | D8 | Login | The password is not case-sensitive | High | TC-03, 2026-10-06 |
 
@@ -34,8 +34,10 @@ D7 are described briefly here:
 - **D5.** `POST /Account/v1/GenerateToken` returns `200` with `"status":"Failed"`.
   `POST /Account/v1/Authorized` says "User not found!" also for an existing user with a
   wrong password.
-- **D6.** After a successful registration, a native alert is shown and the user stays on
-  the registration page.
+- **D6.** Two problems with the registration form. A password that breaks the rules shows an
+  error that disappears too fast to read, and all fields are cleared, so the user has to type
+  everything again. After a successful registration, a native alert is shown and the user
+  stays on the registration page instead of being taken to log in.
 - **D7.** If the site had a cross-site scripting (XSS) flaw, a script could steal the session.
 
 ## D1. An existing username can be registered again with a different password
