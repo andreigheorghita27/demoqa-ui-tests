@@ -15,7 +15,7 @@ class BasePage:
 
     # ── Navigation ─────────────────────────────────────────────────────────────
 
-    def open(self, path: str = "") -> None:
+    def open(self, path: str) -> None:
         # Open a path relative to BASE_URL and wait until the DOM is ready.
         self.page.goto(urljoin(BASE_URL, path), wait_until="domcontentloaded")
 

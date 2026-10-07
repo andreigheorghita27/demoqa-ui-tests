@@ -14,9 +14,20 @@ def step_log_in(context):
     context.login_page.log_in(context.user)
 
 
+# Scenarios with more than one user name them ("user A", "user B"); context.users holds them.
+@when("user {name} logs in with their username and password")
+def step_named_user_logs_in(context, name):
+    context.login_page.log_in(context.users[name])
+
+
 @then("the profile shows the user's username")
 def step_profile_shows_username(context):
     context.profile_page.verify_logged_in_as(context.user.username)
+
+
+@then("the profile shows user {name}'s username")
+def step_profile_shows_named_user(context, name):
+    context.profile_page.verify_logged_in_as(context.users[name].username)
 
 
 @when('the user logs in with "{case}"')

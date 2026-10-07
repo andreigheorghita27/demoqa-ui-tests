@@ -48,16 +48,6 @@ def step_delete_book(context, title):
     context.alert_message = context.profile_page.delete_book(title)
 
 
-@when("user {name} logs in with their username and password")
-def step_named_user_logs_in(context, name):
-    context.login_page.log_in(context.users[name])
-
-
-@then("the profile shows user {name}'s username")
-def step_profile_shows_named_user(context, name):
-    context.profile_page.verify_logged_in_as(context.users[name].username)
-
-
 @when('the user adds "{title}" from the Book Store')
 def step_add_book(context, title):
     context.alert_message = context.book_store_page.add_to_collection(title)

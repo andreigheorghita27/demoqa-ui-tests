@@ -1,3 +1,4 @@
+import json
 import sys
 from pathlib import Path
 from urllib.parse import urlparse
@@ -25,7 +26,7 @@ from pages.profile_page import ProfilePage  # noqa: E402
 HIDE_ELEMENTS_SCRIPT = f"""
 document.addEventListener("DOMContentLoaded", () => {{
     const style = document.createElement("style");
-    style.textContent = {HIDDEN_ELEMENTS_CSS!r};
+    style.textContent = {json.dumps(HIDDEN_ELEMENTS_CSS)};
     document.head.appendChild(style);
 }});
 """

@@ -78,7 +78,10 @@ class BookStoreApi:
         return [book["title"] for book in response.json()["books"]]
 
     def _user_id(self, user: User) -> str:
-        return next(user_id for created, user_id in self.created_users if created == user)
+        for created, user_id in self.created_users:
+            if created == user:
+                return user_id
+        raise ValueError(f"{user.username} was not created through BookStoreApi, so its userID is unknown")
 
     def delete_user(self, user: User, user_id: str) -> APIResponse:
         token = self.generate_token(user)["token"]
