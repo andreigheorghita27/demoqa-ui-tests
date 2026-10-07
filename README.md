@@ -12,7 +12,7 @@ Tests for the Book Store Application on https://demoqa.com/: UI tests with Behav
 | Automated tests | [features/](features/) (`register.feature`, `login.feature`, `collection.feature`) |
 | Bugs found | [docs/known-bugs.md](docs/known-bugs.md) |
 | CI (GitHub Actions) | [.github/workflows/tests.yml](.github/workflows/tests.yml) |
-| Test strategy for an AI feature | *(to do)* |
+| Test strategy for an AI feature | [docs/ai-test-strategy.md](docs/ai-test-strategy.md) |
 | AI usage statement | [below](#ai-usage) |
 
 ## Structure
@@ -75,11 +75,12 @@ checking the correct behaviour and are expected to fail until the site is fixed.
 
 ## AI usage
 
-I used Claude (Claude Code) throughout: I made the decisions and checked its work; Claude drafted, coded and double-checked.
-
-- **Exploration:** I explored the site myself (16 checks) and also had Claude explore it; from that I chose the main flow, which became the test cases.
-- **Rules:** I wrote `CLAUDE.md` with the project rules (layers, locators, waits, data isolation) and checked the code against them as Claude wrote it.
-- **Plan and cases:** I set the scope and risk order and added key cases (data isolation, deleting a book, an invalid ISBN). Claude wrote them up; I had it remove what was out of scope for a short plan.
-- **What I cut:** Claude's `BasePage` was too much code to read; I had it cut to the helpers we use, without the `click`/`fill` wrappers, since Playwright already waits.
-- **Automation:** I dropped separate register and valid-login tests (every test does both). Claude noticed nothing would check that logout ends the session, so that check moved into the logout test.
-- **Review:** from Claude's review of the suite I chose the fixes: cleanup that always runs, a configurable timeout, an ad allowlist.
+I used Claude (Claude Code) throughout: I made the decisions and checked its work; Claude drafted, coded and reviewed.
+- **Exploration:** I explored the site (16 checks) and also had Claude explore it; I chose the main flow from that.
+- **Rules:** I wrote `CLAUDE.md` (layers, locators, waits, data isolation) and checked Claude's code against it.
+- **Plan and cases:** I set the scope, risk order and key cases (isolation, delete, invalid ISBN); Claude wrote them up.
+- **What I cut:** an oversized `BasePage` (no `click`/`fill` wrappers), out-of-scope plan parts, separate register/login tests.
+- **Kept from Claude:** a check that logout ends the session; from its review, always-run cleanup, a configurable timeout, an ad allowlist.
+- **AI test strategy:** I set aside Claude's full draft and had it ask me questions on each section; the ideas are my answers:
+  one dangerous answer in 10 runs fails the case (a non-IT user trusts it), alerts from the documentation, a person sampling the LLM judge.
+- Claude proposed the example cases, recording the model version and an exact lookup before the judge, and fitted it into two pages.
