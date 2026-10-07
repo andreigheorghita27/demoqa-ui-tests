@@ -7,6 +7,7 @@ UI test suite for https://demoqa.com/ (Book Store Application) — Behave + Play
 
 ```
 .
+├── .github/workflows/    # CI: tests on push, pull requests and weekly; dependency audit
 ├── behave.ini
 ├── requirements.txt
 ├── .env                  # optional local settings (gitignored); read by utils/config.py

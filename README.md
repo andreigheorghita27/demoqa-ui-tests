@@ -11,6 +11,7 @@ Tests for the Book Store Application on https://demoqa.com/: UI tests with Behav
 | Test cases (Gherkin) | [docs/test-cases.md](docs/test-cases.md) |
 | Automated tests | [features/](features/) (`register.feature`, `login.feature`, `collection.feature`) |
 | Bugs found | [docs/known-bugs.md](docs/known-bugs.md) |
+| CI (GitHub Actions) | [.github/workflows/tests.yml](.github/workflows/tests.yml) |
 | Test strategy for an AI feature | *(to do)* |
 | AI usage statement | [below](#ai-usage) |
 
@@ -18,6 +19,7 @@ Tests for the Book Store Application on https://demoqa.com/: UI tests with Behav
 
 ```
 .
+├── .github/workflows/    # CI: runs the suite on push, on pull requests and weekly
 ├── behave.ini            # behave settings; skips @known_bug by default
 ├── requirements.txt
 ├── docs/                 # test plan, test cases, known bugs
@@ -59,6 +61,13 @@ behave                          # all features
 behave features/login.feature   # one feature
 behave --tags=@known_bug        # only the tests for known bugs
 ```
+
+Each run writes JUnit results to `reports/junit/` and a screenshot of every failed step to
+`reports/screenshots/`.
+
+On GitHub, the suite runs headless on every push to `main`, on pull requests and once a week
+(the site is public and can change even when the code does not). The same job audits the
+dependencies with `pip-audit`; the reports are kept as a build artifact.
 
 Tests that fail because of a bug in [docs/known-bugs.md](docs/known-bugs.md) are tagged
 `@known_bug` and skipped by default, so a red run always means something new broke. They keep
