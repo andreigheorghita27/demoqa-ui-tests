@@ -1,6 +1,6 @@
 from behave import given, when, then
 
-from utils.test_data import new_user
+from utils.test_data import new_user, with_same_username
 
 
 @given("a user that is already registered")
@@ -9,9 +9,9 @@ def step_registered_user(context):
     context.api.register(context.user)
 
 
-@when("the user is registered through the API")
-def step_register_through_api(context):
-    context.response = context.api.create_user(context.user)
+@when("the same username is registered through the API with {case}")
+def step_register_same_username(context, case):
+    context.response = context.api.create_user(with_same_username(context.user, case))
 
 
 @then('the registration is rejected with "{message}"')

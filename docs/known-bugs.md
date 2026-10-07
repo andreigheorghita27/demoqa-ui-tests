@@ -47,7 +47,7 @@ D7 are described briefly here:
 | **Area** | Registration (Book Store API) |
 | **Severity** | Critical |
 | **Last reproduced** | 2026-10-06 |
-| **Test** | Not automated yet. TC-02 covers the case with the same password, which works. |
+| **Test** | TC-02, case "a different password". Fails today. |
 
 **Steps to reproduce**
 

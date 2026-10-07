@@ -35,22 +35,22 @@ And the new user can log in
 
 ## TC-02 Register an existing username
 
-**Priority:** P1 · **Level:** API · **Automated:** the same-password case,
+**Priority:** P1 · **Level:** API · **Automated:** yes, the D1 case is skipped by default,
 [features/register.feature](../features/register.feature)
 
 ```gherkin
-Scenario Outline: Register an existing username with <password>
+Scenario Outline: Register an existing username with <case>
   Given a user that is already registered
-  When the same username is registered through the API with <password>
+  When the same username is registered through the API with <case>
   Then the registration is rejected with "User exists!"
 
   Examples:
-    | password             |
-    | the same password    |
+    | case              |
+    | the same password |
 
   # Fails today: a different password creates a second account (known bug D1).
   Examples: Known bug D1
-    | password             |
+    | case                 |
     | a different password |
 ```
 

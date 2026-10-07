@@ -15,6 +15,18 @@ def new_user() -> User:
     return User(username=f"test_{suffix}", password=f"Pw1!{suffix}")
 
 
+def with_same_username(user: User, case: str) -> User:
+    # A second registration of `user`'s username, by the case names used in register.feature.
+    cases = {
+        "the same password": lambda: user,
+        # Meets the password rules, but is not the user's password.
+        "a different password": lambda: replace(user, password=user.password + "x"),
+    }
+    if case not in cases:
+        raise ValueError(f"Unknown registration case {case!r}, expected one of {list(cases)}")
+    return cases[case]()
+
+
 def with_wrong_credentials(user: User, case: str) -> User:
     # Credentials that must not log in as `user`, by the case names used in login.feature.
     cases = {

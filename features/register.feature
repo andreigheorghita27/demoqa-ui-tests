@@ -5,7 +5,17 @@ Feature: Registration
   setup and fails with "Setup failed" if it breaks.
 
   @api
-  Scenario: TC-02 Register an existing user with the same credentials
+  Scenario Outline: TC-02 Register an existing username with <case>
     Given a user that is already registered
-    When the user is registered through the API
+    When the same username is registered through the API with <case>
     Then the registration is rejected with "User exists!"
+
+    Examples:
+      | case              |
+      | the same password |
+
+    # Fails today: a different password creates a second account (docs/known-bugs.md, D1).
+    @known_bug
+    Examples: Known bug D1
+      | case                 |
+      | a different password |
