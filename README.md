@@ -19,10 +19,11 @@ Tests for the Book Store Application on https://demoqa.com/: UI tests with Behav
 
 ```
 .
-├── .github/workflows/    # CI: runs the suite on push, on pull requests and weekly
+├── .github/workflows/    # CI: runs the suite on push, on pull requests and weekly; dependency audit
+├── CLAUDE.md             # project rules for Claude Code (see AI usage)
 ├── behave.ini            # behave settings; skips @known_bug by default
 ├── requirements.txt
-├── docs/                 # test plan, test cases, known bugs
+├── docs/                 # test plan, test cases, known bugs, AI test strategy
 ├── features/
 │   ├── environment.py    # hooks: browser, fresh context per scenario, ad blocking, cleanup
 │   ├── *.feature

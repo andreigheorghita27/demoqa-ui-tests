@@ -37,7 +37,7 @@ based on what exploration found.
 | **P2** | A user cannot log in, is not really logged out, or sees another user's data after switching accounts | High: no access, or one user's data shown to another | Medium: D8 found | TC-03 – TC-05 |
 | **P3** | A book cannot be added or deleted, the collection is lost, or it accepts a book that does not exist | High: the main purpose of the app | Low: worked during exploration | TC-06 – TC-08 |
 | **P4** | Account deletion does not do what the UI shows | Medium: the account is deleted, but the page says otherwise | High: D2 found | TC-09 |
-| **P5** | Search gives wrong results or no feedback | Low: does not block the user | High: D3, D4 found | None: reported only |
+| **P5** | Search or a book page gives wrong results or no feedback | Low: does not block the user | High: D3, D4 found | None: reported only |
 
 D5 (wrong credentials return `200`) and D7 (the session cookie is readable by JavaScript) weaken
 the session (P2). They are reported, not tested further: a test would only confirm them again.

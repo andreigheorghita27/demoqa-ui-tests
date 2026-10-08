@@ -11,8 +11,7 @@ UI test suite for https://demoqa.com/ (Book Store Application) — Behave + Play
 ├── behave.ini
 ├── requirements.txt
 ├── .env                  # optional local settings (gitignored); read by utils/config.py
-├── docs/
-│   └── test-plan.md
+├── docs/                 # test-plan, test-cases, known-bugs, ai-test-strategy (.md)
 ├── features/
 │   ├── environment.py    # hooks: browser per run, fresh context per scenario, screenshot on failure
 │   ├── *.feature

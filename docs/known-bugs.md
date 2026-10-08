@@ -30,7 +30,8 @@ D7 are described briefly here:
   on "Delete Account", right after the profile loaded, did nothing.
 - **D3.** "git" finds a book, " git " finds nothing. With no match, the pager shows
   "Page 1 of 0".
-- **D4.** For example `?search=0000000000000` or `?search=3`.
+- **D4.** A book page's address is `/books?search=<ISBN>`. For example `?search=0000000000000`
+  or `?search=3`.
 - **D5.** `POST /Account/v1/GenerateToken` returns `200` with `"status":"Failed"`.
   `POST /Account/v1/Authorized` says "User not found!" also for an existing user with a
   wrong password.
