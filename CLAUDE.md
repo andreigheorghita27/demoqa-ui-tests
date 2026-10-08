@@ -102,4 +102,3 @@ python -m venv .venv
 - Code, comments, docs and commit messages are in English.
 - Never commit `.env` or credentials. There is no `.env.example`: the settings and their
   defaults are listed in the README, and `utils/config.py` works without a `.env`.
-- Do not mention who this suite was written for anywhere in tracked files.

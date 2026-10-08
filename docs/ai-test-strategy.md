@@ -32,20 +32,23 @@ run would have said something else. Better to act on a false alarm than to ignor
 A short answer is fine if it is clear and gives the next step. Failing every weaker answer would
 keep the tests red, and real critical failures would get lost in the noise.
 
-**A new version** (model or instructions) ships only with 0 critical failures and quality no lower
-than the current version. If it is better overall but gets one fact wrong that the old one got
-right, it waits: there is no reason to ship a problem we know about and can fix first.
+**A new version** ships only with 0 critical failures and quality no lower than today's. If it is
+better overall but gets one fact wrong that the old one got right, it waits: no reason to ship a
+problem we know about and can fix first.
 
 ## 2. A repeatable test set
 
-The answers vary, so everything else stays fixed. If a case passes on Monday and fails on
-Tuesday, I know the assistant changed, not the test data.
+Everything except the answers stays fixed: if a case fails on Tuesday after passing on Monday,
+the assistant changed, not the test data.
 
 - **Saved alerts, built from the documentation**, not live ones: about 50 to start, covering the
   documented alert types. Real alerts the assistant got wrong are added (without personal data).
 - **An answer key per alert:** not a model answer, but checks. The facts that must appear, what
   must not appear ("no action needed") and the actions expected ("run a full scan").
-- **10 runs per case**, because one run says nothing about a variable output.
+- **10 runs per case**, because one run says nothing about a variable output. 10 clean runs do
+  not prove an answer is safe, so the critical cases (ransomware, prompt injection) run more often.
+- **Several languages**, Romanian included: each case is also asked in the languages the product
+  supports, because facts and advice can change with the language.
 - **The setup is recorded:** each run saves the model version and instructions used.
 
 **What goes in the set** is chosen by risk, as in Part 1:
@@ -68,8 +71,9 @@ spread to 3 other computers" invents both, a critical failure.
 
 50 alerts × 10 runs are 500 answers, too many for a person to read, so the check has two levels:
 
-1. **Exact facts, by lookup.** IPs, files, devices, users and severity in the answer are searched
-   for in the alert, like Ctrl+F; a value not found is invented. Cheap and exact, so it runs on
+1. **Exact facts, by lookup.** IPs, files, devices, users and severity are pulled from the answer
+   with patterns (regex for IPs and file names) and a synonym list ("grav" = "Critical"), then
+   searched for in the alert, like Ctrl+F; a value not found is invented. Cheap, so it runs on
    every answer.
 2. **Statements, by an LLM as a judge.** A text search cannot check "it spread to 3 other
    computers". A second model gets the alert and the answer and flags each unsupported statement.
@@ -77,12 +81,10 @@ spread to 3 other computers" invents both, a critical failure.
 **The judge is also an AI and can be wrong.** A person checks a random sample of its verdicts
 (20–30 per release run), including the "pass" ones, where missed inventions hide. If they disagree
 with more than 1 verdict in 10, the judge is not trusted until its instructions are fixed; until
-then a person checks the statements.
+then a person checks the statements. Every critical failure the judge reports is confirmed by a
+person before it blocks a release: with zero tolerance, one judge mistake would block everything.
 
 ## 4. Automate or verify manually
-
-**Automate what is repetitive and has a clear answer; keep people where judgment is needed, and on
-checking the automation.**
 
 | Activity | Who | Why |
 |---|---|---|
@@ -94,5 +96,5 @@ checking the automation.**
 | New prompt injection attempts | AI suggests many, a person picks | AI finds variety; a person judges the real risk |
 | Releasing a new version | A person, on the automated results | The tests give the facts; the decision stays with people |
 
-What people find (a wrong answer, a new injection) becomes a new saved case, so the automated part
-grows with every round.
+Automate what is repetitive and has a clear answer; keep people on judgment and on checking the
+automation. What they find becomes a new saved case, so the automated part keeps growing.

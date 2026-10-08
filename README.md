@@ -37,7 +37,7 @@ Tests for the Book Store Application on https://demoqa.com/: UI tests with Behav
 
 ## Setup
 
-Requires Python 3.10+.
+Tested on Python 3.14, the version CI runs on.
 
 ```bash
 python -m venv .venv
