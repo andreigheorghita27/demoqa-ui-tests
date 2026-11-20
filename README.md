@@ -1,5 +1,7 @@
 # demoqa-ui-tests
 
+[![Tests](https://github.com/andreigheorghita27/demoqa-ui-tests/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/andreigheorghita27/demoqa-ui-tests/actions/workflows/tests.yml)
+
 Tests for the Book Store Application on https://demoqa.com/: UI tests with Behave + Playwright
 (Python, Page Object Model) and API checks on the Book Store API.
 
